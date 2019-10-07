@@ -1,7 +1,7 @@
 import { Controller } from "@nestjs/common";
 import { ColumnService } from "./column.service";
 
-@Controller(`entity/type`)
+@Controller(`entity/column`)
 export class ColumnController{
-    constructor(private typeService:ColumnService){}
+    constructor(private columnService:ColumnService){}
 }
