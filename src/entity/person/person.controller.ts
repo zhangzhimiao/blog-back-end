@@ -1,5 +1,6 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post, Body, Header } from '@nestjs/common';
 import { PersonService } from './person.service';
+import { Person } from './person.entity';
 
 @Controller(`entity/person`)
 export class PersonController {
@@ -8,8 +9,11 @@ export class PersonController {
   getHuman() {
     return this.personService.findAll();
   }
-  @Get(`*`)
-  getHumans() {
-    return this.personService.findAll();
+
+  @Post(`register`)
+  registe(@Body('Person') person) {
+    console.log(person);
+    return '123';
+    // return this.personService.findAll();
   }
 }
