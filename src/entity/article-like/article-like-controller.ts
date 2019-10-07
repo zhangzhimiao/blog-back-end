@@ -1,7 +1,7 @@
-import { Controller } from "@nestjs/common";
-import { ArticleLikeService } from "./article-like.service";
+import { Controller } from '@nestjs/common';
+import { ArticleLikeService } from './article-like.service';
 
 @Controller(`entity/article-like`)
-export class ArticleLikeController{
-    constructor(private articleLikeService: ArticleLikeService){}
+export class ArticleLikeController {
+  constructor(private articleLikeService: ArticleLikeService) {}
 }
