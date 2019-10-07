@@ -13,4 +13,8 @@ export class PersonService {
   async findAll(): Promise<Person[]> {
     return await this.personRepository.find();
   }
+
+  async register(person: Person): Promise<Person> {
+    return await this.personRepository.save(person);
+  }
 }

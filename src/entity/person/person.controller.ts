@@ -11,9 +11,10 @@ export class PersonController {
   }
 
   @Post(`register`)
-  registe(@Body('Person') person) {
-    console.log(person);
-    return '123';
-    // return this.personService.findAll();
+  registe(@Body('data') data: { name: string; password: string }) {
+    const person = new Person();
+    person.name = data.name;
+    person.password = data.password;
+    return this.personService.register(person);
   }
 }
