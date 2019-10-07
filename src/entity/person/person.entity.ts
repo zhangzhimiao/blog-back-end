@@ -11,19 +11,18 @@ export class Person {
   @Column()
   password: string;
 
-  @Column()
-  sex:string;
+  @Column({ nullable: true })
+  sex: string;
 
-  @Column()
-  
-  birthday:string;
+  @Column({ nullable: true })
+  birthday: string;
 
-  @Column()
-  job:string;
+  @Column({ nullable: true })
+  job: string;
 
-  @Column()
-  part:string;
+  @Column({ nullable: true })
+  part: string;
 
-  @Column()
-  industry:string;
+  @Column({ nullable: true })
+  industry: string;
 }
