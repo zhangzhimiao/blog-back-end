@@ -1,10 +1,10 @@
 {
   "type": "mysql",
-  "host": "localhost",
+  "host": "122.51.27.29",
   "port": 3306,
   "username": "root",
-  "password": "demodb",
-  "database": "test",
+  "password": "blogDB",
+  "database": "blog",
   "entities": ["src/**/*.entity{.ts,.js}"],
   "synchronize": true
 }
