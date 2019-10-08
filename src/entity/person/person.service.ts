@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, getManager } from 'typeorm';
+import { Repository, getManager, getRepository } from 'typeorm';
 import { Person } from './person.entity';
 import { BackData } from 'src/types/response';
 
@@ -41,6 +41,23 @@ export class PersonService {
         code: 1,
         data: {
           message: 'login error',
+        },
+      }));
+  }
+
+  async getPerson(personId: string): Promise<BackData> {
+    return getRepository(Person)
+      .findOne(personId)
+      .then(d => ({
+        code: 0,
+        data: {
+          ...d,
+        },
+      }))
+      .catch(e => ({
+        code: 1,
+        data: {
+          message: "can't find this user",
         },
       }));
   }

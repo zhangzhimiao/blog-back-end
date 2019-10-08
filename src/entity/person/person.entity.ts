@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Article } from '../article/article.entity';
 
 @Entity()
 export class Person {
@@ -31,4 +32,7 @@ export class Person {
 
   @Column({ nullable: true })
   industry: string;
+
+  @OneToMany(type => Article, article => article.person)
+  articles: Article[];
 }

@@ -1,4 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToOne,
+  JoinColumn,
+  ManyToOne,
+} from 'typeorm';
 import { Person } from '../person/person.entity';
 
 @Entity()
@@ -6,7 +13,7 @@ export class Article {
   @PrimaryGeneratedColumn()
   id: string;
 
-  @OneToOne(type => Person)
+  @ManyToOne(type => Person, person => person.articles)
   person: Person;
 
   @Column()
