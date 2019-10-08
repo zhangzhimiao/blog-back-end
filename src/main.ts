@@ -4,12 +4,7 @@ import * as cors from 'cors';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.use(
-    cors({
-      origin: 'http://localhost:8080',
-      credentials: true,
-    }),
-  );
+  app.enableCors();
   await app.listen(3000);
 }
 bootstrap();
