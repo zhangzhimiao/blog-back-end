@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, getManager } from 'typeorm';
 import { Person } from './person.entity';
+import { BackData } from 'src/types/response';
 
 @Injectable()
 export class PersonService {
@@ -10,11 +11,37 @@ export class PersonService {
     private readonly personRepository: Repository<Person>,
   ) {}
 
-  async findAll(): Promise<Person[]> {
-    return await this.personRepository.find();
+  async register(person: Person): Promise<BackData> {
+    return await this.personRepository
+      .save(person)
+      .then(d => ({ code: 0, data: d }))
+      .catch(e => ({
+        code: 1,
+        data: {
+          message: 'register error',
+        },
+      }));
   }
 
-  async register(person: Person): Promise<Person> {
-    return await this.personRepository.save(person);
+  async login(person: Person): Promise<BackData> {
+    return await getManager()
+      .createQueryBuilder(Person, 'person')
+      .where('person.name = :name and person.password = :password', {
+        name: person.name,
+        password: person.password,
+      })
+      .getOne()
+      .then(d => ({
+        code: 0,
+        data: {
+          d,
+        },
+      }))
+      .catch(e => ({
+        code: 1,
+        data: {
+          message: 'login error',
+        },
+      }));
   }
 }
