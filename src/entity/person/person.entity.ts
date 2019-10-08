@@ -11,6 +11,9 @@ export class Person {
   @Column()
   password: string;
 
+  @Column()
+  isAdmin: number;
+
   @Column({ nullable: true })
   sex: string;
 

@@ -11,6 +11,7 @@ export class PersonController {
     const person = new Person();
     person.name = data.name;
     person.password = data.password;
+    person.isAdmin = 0;
     return this.personService.register(person);
   }
 
