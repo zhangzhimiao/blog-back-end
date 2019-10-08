@@ -12,6 +12,7 @@ export class PersonController {
     person.name = data.name;
     person.password = data.password;
     person.isAdmin = 0;
+    person.isEnabled = 1;
     return this.personService.register(person);
   }
 

@@ -14,6 +14,9 @@ export class Person {
   @Column()
   isAdmin: number;
 
+  @Column()
+  isEnabled: number;
+
   @Column({ nullable: true })
   sex: string;
 
