@@ -1,12 +1,15 @@
 import {
   Entity,
   PrimaryGeneratedColumn,
-  Column,
-  OneToOne,
-  JoinColumn,
+  Column as Col,
   ManyToOne,
+  OneToMany,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
 import { Person } from '../person/person.entity';
+import { Label } from '../label/label.entity';
+import { Column } from '../column/column.entity';
 
 @Entity()
 export class Article {
@@ -16,15 +19,22 @@ export class Article {
   @ManyToOne(type => Person, person => person.articles)
   person: Person;
 
-  @Column()
+  @Col()
   content: string;
 
-  @Column()
+  @Col()
   publishTime: number;
 
-  @Column()
+  @Col()
   isPublic: number;
 
-  @Column()
+  @Col()
   title: string;
+
+  @OneToMany(type => Label, label => label.article)
+  labels: Label[];
+
+  @ManyToMany(type => Column)
+  @JoinTable()
+  columns: Column[];
 }

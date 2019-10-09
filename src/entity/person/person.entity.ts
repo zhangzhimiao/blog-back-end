@@ -1,38 +1,54 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import {
+  Entity,
+  Column as Col,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm';
 import { Article } from '../article/article.entity';
+import { Column } from '../column/column.entity';
 
 @Entity()
 export class Person {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Col()
   name: string;
 
-  @Column()
+  @Col()
   password: string;
 
-  @Column()
+  @Col()
   isAdmin: number;
 
-  @Column()
+  @Col()
   isEnabled: number;
 
-  @Column({ nullable: true })
+  @Col({ nullable: true })
   sex: string;
 
-  @Column({ nullable: true })
+  @Col({ nullable: true })
   birthday: string;
 
-  @Column({ nullable: true })
+  @Col({ nullable: true })
   job: string;
 
-  @Column({ nullable: true })
+  @Col({ nullable: true })
   part: string;
 
-  @Column({ nullable: true })
+  @Col({ nullable: true })
   industry: string;
 
   @OneToMany(type => Article, article => article.person)
   articles: Article[];
+
+  @ManyToMany(type => Column)
+  @JoinTable()
+  columns: Column[];
+
+  @ManyToMany(type => Person)
+  @JoinTable()
+  persons: Person[];
 }

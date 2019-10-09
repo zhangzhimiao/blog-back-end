@@ -6,9 +6,16 @@ export class Service {
     timeout: 1000,
   });
   getPerson(personId: string) {
-    return this.instance.post('person/getPerson', {
+    return this.instance.post('person/detail', {
       data: {
         personId,
+      },
+    });
+  }
+  getColumn(columnId: string) {
+    return this.instance.post('column/detail', {
+      data: {
+        columnId,
       },
     });
   }

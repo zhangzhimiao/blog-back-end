@@ -6,7 +6,7 @@ import { Person } from './person.entity';
 export class PersonController {
   constructor(private personService: PersonService) {}
 
-  @Post(`getPerson`)
+  @Post(`detail`)
   getPerson(@Body('data') data: { personId: string }) {
     return this.personService.getPerson(data.personId);
   }

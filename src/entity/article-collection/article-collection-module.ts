@@ -9,4 +9,4 @@ import { ArticleCollectionController } from './article-collection-controller';
   providers: [ArticleCollectionService],
   controllers: [ArticleCollectionController],
 })
-export class ArticleLikeModule {}
+export class ArticleCollectionModule {}

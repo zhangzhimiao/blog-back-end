@@ -1,10 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Article } from './article.entity';
-import { Repository, getConnection, getManager } from 'typeorm';
+import { Repository, getManager, getConnection } from 'typeorm';
 import { BackData } from 'src/types/response';
-import { Person } from '../person/person.entity';
-import { ArticleCollection } from '../article-collection/article-collection.entity';
+import { Label } from '../label/label.entity';
 
 @Injectable()
 export class ArticleService {
@@ -13,17 +12,11 @@ export class ArticleService {
     private readonly articleRepository: Repository<Article>,
   ) {}
 
-  async publish(
-    article: Article,
-    person: Person,
-    articleCollection: ArticleCollection,
-  ): Promise<BackData> {
+  async publish(article: Article, labels: Label[]): Promise<BackData> {
     getConnection().manager.save(article);
-    getConnection().manager.save(person);
-    getConnection().manager.save(articleCollection);
-    return new Promise(resolve => {
-      resolve();
-    })
+    getConnection().manager.save(labels);
+
+    return Promise.resolve()
       .then(() => ({ code: 0, data: {} }))
       .catch(e => ({
         code: 1,
@@ -37,7 +30,7 @@ export class ArticleService {
     return await getManager()
       .createQueryBuilder(Article, 'article')
       .where('article.id = :id', {
-        id: id,
+        id,
       })
       .getOne()
       .then(d => ({
