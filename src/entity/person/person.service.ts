@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, getManager, getRepository, getConnection } from 'typeorm';
 import { Person } from './person.entity';
 import { BackData } from 'src/types/response';
-import { Article } from '../article/article.entity';
 
 @Injectable()
 export class PersonService {
@@ -12,7 +11,12 @@ export class PersonService {
     private readonly personRepository: Repository<Person>,
   ) {}
 
-  async register(person: Person): Promise<BackData> {
+  async register(data: { name: string; password: string }): Promise<BackData> {
+    const person = new Person();
+    person.name = data.name;
+    person.password = data.password;
+    person.isAdmin = 0;
+    person.isEnabled = 1;
     return await this.personRepository
       .save(person)
       .then(d => ({ code: 0, data: d }))
@@ -24,7 +28,10 @@ export class PersonService {
       }));
   }
 
-  async login(person: Person): Promise<BackData> {
+  async login(data: { name: string; password: string }): Promise<BackData> {
+    const person = new Person();
+    person.name = data.name;
+    person.password = data.password;
     return await getManager()
       .createQueryBuilder(Person, 'person')
       .where('person.name = :name and person.password = :password', {

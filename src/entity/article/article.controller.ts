@@ -12,7 +12,7 @@ export class ArticleController {
     content: string;
     isPublic: string;
     title: string;
-    columnId: string;
+    columnIds: string[];
     label: string[];
   }) {
     return this.articleService.publish(data);

@@ -13,19 +13,11 @@ export class PersonController {
 
   @Post(`register`)
   registe(@Body('data') data: { name: string; password: string }) {
-    const person = new Person();
-    person.name = data.name;
-    person.password = data.password;
-    person.isAdmin = 0;
-    person.isEnabled = 1;
-    return this.personService.register(person);
+    return this.personService.register(data);
   }
 
   @Post(`login`)
   login(@Body('data') data: { name: string; password: string }) {
-    const person = new Person();
-    person.name = data.name;
-    person.password = data.password;
-    return this.personService.login(person);
+    return this.personService.login(data);
   }
 }

@@ -1,16 +1,13 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity()
-export class ArticleCollection {
+export class PersonCare {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  collectTime: number;
+  carePersonId: string;
 
   @Column()
-  articleId: string;
-
-  @Column()
-  personId: string;
+  beCarePersonId: string;
 }

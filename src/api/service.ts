@@ -22,6 +22,15 @@ export class Service {
   getArticle(articleId: string) {
     return this.instance.get(`article/detail${articleId}`);
   }
+
+  addArticleColumn(articleId: string, columnIds = []) {
+    return this.instance.post('article-column/add-article-column', {
+      data: {
+        articleId,
+        columnIds,
+      },
+    });
+  }
 }
 
 export const service = new Service();

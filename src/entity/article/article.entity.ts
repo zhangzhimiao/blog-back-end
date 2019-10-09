@@ -14,7 +14,7 @@ import { Column } from '../column/column.entity';
 @Entity()
 export class Article {
   @PrimaryGeneratedColumn()
-  id: string;
+  id: number;
 
   @ManyToOne(type => Person, person => person.articles)
   person: Person;
@@ -33,8 +33,4 @@ export class Article {
 
   @OneToMany(type => Label, label => label.article)
   labels: Label[];
-
-  @ManyToMany(type => Column)
-  @JoinTable()
-  columns: Column[];
 }
