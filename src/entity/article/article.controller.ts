@@ -21,7 +21,7 @@ export class ArticleController {
     columnId: string;
     label: string[];
   }) {
-    service.getPerson(data.personId).then(personData => {
+    return service.getPerson(data.personId).then(personData => {
       return service.getColumn(data.columnId).then(columnData => {
         const column = new Column();
         column.id = columnData.data.data.id;
