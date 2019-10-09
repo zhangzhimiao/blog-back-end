@@ -4,6 +4,7 @@ import { Article } from './article.entity';
 import { Repository, getConnection, getManager } from 'typeorm';
 import { BackData } from 'src/types/response';
 import { Person } from '../person/person.entity';
+import { ArticleCollection } from '../article-collection/article-collection.entity';
 
 @Injectable()
 export class ArticleService {
@@ -12,9 +13,14 @@ export class ArticleService {
     private readonly articleRepository: Repository<Article>,
   ) {}
 
-  async publish(article: Article, person: Person): Promise<BackData> {
+  async publish(
+    article: Article,
+    person: Person,
+    articleCollection: ArticleCollection,
+  ): Promise<BackData> {
     getConnection().manager.save(article);
     getConnection().manager.save(person);
+    getConnection().manager.save(articleCollection);
     return new Promise(resolve => {
       resolve();
     })

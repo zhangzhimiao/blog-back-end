@@ -1,4 +1,4 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { ArticleCollectionService } from './article-collection.service';
 
 @Controller(`entity/article-collection`)
