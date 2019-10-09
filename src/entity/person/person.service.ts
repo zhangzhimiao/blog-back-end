@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, getManager, getRepository, getConnection } from 'typeorm';
 import { Person } from './person.entity';
 import { BackData } from 'src/types/response';
+import { Column } from '../column/column.entity';
 
 @Injectable()
 export class PersonService {
@@ -19,7 +20,7 @@ export class PersonService {
     person.isEnabled = 1;
     return await this.personRepository
       .save(person)
-      .then(d => ({ code: 0, data: d }))
+      .then(d => ({ code: 0, data: { ...d } }))
       .catch(e => ({
         code: 1,
         data: {
@@ -42,7 +43,7 @@ export class PersonService {
       .then(d => ({
         code: 0,
         data: {
-          d,
+          ...d,
         },
       }))
       .catch(e => ({
@@ -66,6 +67,48 @@ export class PersonService {
         code: 1,
         data: {
           message: "can't find this user",
+        },
+      }));
+  }
+
+  async getColumns(id: string): Promise<BackData> {
+    return getRepository(Person)
+      .find({ relations: ['columns'], where: { id } })
+      .then(d => ({
+        code: 0,
+        data: {
+          ...d,
+        },
+      }))
+      .catch(e => ({
+        code: 1,
+        data: {
+          message: "can't find columns",
+        },
+      }));
+  }
+
+  async addColumns(columnIds: string[], personId: string): Promise<BackData> {
+    const result = columnIds.map(d => {
+      const column = new Column();
+      column.id = parseInt(d, 10);
+      return column;
+    });
+    const person = new Person();
+    person.id = parseInt(personId, 10);
+    person.columns = result;
+    return getConnection()
+      .manager.save(person)
+      .then(d => ({
+        code: 0,
+        data: {
+          ...d,
+        },
+      }))
+      .catch(e => ({
+        code: 1,
+        data: {
+          message: 'add columns failed',
         },
       }));
   }

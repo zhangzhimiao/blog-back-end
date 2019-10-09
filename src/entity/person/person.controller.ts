@@ -1,6 +1,5 @@
-import { Controller, Get, Post, Body, Header } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { PersonService } from './person.service';
-import { Person } from './person.entity';
 
 @Controller(`entity/person`)
 export class PersonController {
@@ -19,5 +18,15 @@ export class PersonController {
   @Post(`login`)
   login(@Body('data') data: { name: string; password: string }) {
     return this.personService.login(data);
+  }
+
+  @Get('columns/:id')
+  columns(@Param('id') id: string) {
+    return this.personService.getColumns(id);
+  }
+
+  @Post('add-column')
+  addColumns(@Body('data') data: { columnIds: string[]; personId: string }) {
+    return this.personService.addColumns(data.columnIds, data.personId);
   }
 }
