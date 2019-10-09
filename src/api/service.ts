@@ -19,6 +19,9 @@ export class Service {
       },
     });
   }
+  getArticle(articleId: string) {
+    return this.instance.get(`article/detail${articleId}`);
+  }
 }
 
 export const service = new Service();
