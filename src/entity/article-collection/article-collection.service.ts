@@ -13,7 +13,19 @@ export class ArticleCollectionService {
     private readonly articleCollectionRepository: Repository<ArticleCollection>,
   ) {}
 
-  async addCollection(articleCollection: ArticleCollection): Promise<BackData> {
+  async addCollection(data: {
+    personId: string;
+    articleId: string;
+  }): Promise<BackData> {
+    const person = new Person();
+    person.id = parseInt(data.personId, 10);
+    const article = new Article();
+    article.id = data.articleId;
+    const date = new Date().getTime() / 1000;
+    const articleCollection = new ArticleCollection();
+    articleCollection.collectTime = date;
+    articleCollection.article = article;
+    articleCollection.person = person;
     return this.articleCollectionRepository
       .save(articleCollection)
       .then(d => ({
