@@ -1,17 +1,13 @@
-import { Entity, PrimaryGeneratedColumn, OneToOne, JoinColumn } from 'typeorm';
-import { Article } from '../article/article.entity';
-import { Person } from '../person/person.entity';
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity()
 export class ArticleLike {
   @PrimaryGeneratedColumn()
   id: string;
 
-  @OneToOne(type => Article)
-  @JoinColumn()
-  article: Article;
+  @Column()
+  articleId: string;
 
-  @OneToOne(type => Person)
-  @JoinColumn()
-  person: Person;
+  @Column()
+  personId: string;
 }

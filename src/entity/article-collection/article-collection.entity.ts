@@ -1,12 +1,4 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  OneToOne,
-  JoinColumn,
-  Column,
-} from 'typeorm';
-import { Article } from '../article/article.entity';
-import { Person } from '../person/person.entity';
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity()
 export class ArticleCollection {
@@ -16,11 +8,9 @@ export class ArticleCollection {
   @Column()
   collectTime: number;
 
-  @OneToOne(type => Article)
-  @JoinColumn()
-  article: Article;
+  @Column()
+  articleId: string;
 
-  @OneToOne(type => Person)
-  @JoinColumn()
-  person: Person;
+  @Column()
+  personId: string;
 }

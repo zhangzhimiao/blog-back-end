@@ -1,25 +1,15 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  OneToOne,
-  JoinColumn,
-} from 'typeorm';
-import { Article } from '../article/article.entity';
-import { Person } from '../person/person.entity';
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity()
 export class ArticleComment {
   @PrimaryGeneratedColumn()
   id: string;
 
-  @OneToOne(type => Article)
-  @JoinColumn()
-  article: Article;
+  @Column()
+  articleId: string;
 
-  @OneToOne(type => Person)
-  @JoinColumn()
-  person: Person;
+  @Column()
+  personId: string;
 
   @Column()
   content: string;
@@ -27,7 +17,6 @@ export class ArticleComment {
   @Column()
   commentTime: number;
 
-  @OneToOne(type => ArticleComment, { nullable: true })
-  @JoinColumn()
-  parentCommetn: ArticleComment;
+  @Column({ nullable: true })
+  parentCommentId: string;
 }
