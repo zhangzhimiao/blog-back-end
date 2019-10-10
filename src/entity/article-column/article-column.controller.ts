@@ -11,12 +11,17 @@ export class ArticleColumnController {
   }
 
   @Get('article/:articleId')
-  getAtricleCollection(@Param('articleId') articleId: string) {
+  getAtricleColumn(@Param('articleId') articleId: string) {
     return this.articleLikeService.getAtricleColumns(articleId);
   }
 
   @Delete('delete')
   deleteColumn(@Body('data') data: { articleId: string }) {
     return this.articleLikeService.deleteColumn(data.articleId);
+  }
+
+  @Get('column/:columnId')
+  getColumnAtricle(@Param('columnId') columnId: string) {
+    return this.articleLikeService.getColumnAtricle(columnId);
   }
 }

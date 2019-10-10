@@ -1,4 +1,4 @@
-import { Controller, Body, Post, Get, Param } from '@nestjs/common';
+import { Controller, Body, Post, Get, Param, Query } from '@nestjs/common';
 import { ArticleService } from './article.service';
 
 @Controller(`entity/article`)
@@ -21,5 +21,10 @@ export class ArticleController {
   @Get('detail/:id')
   getArticleDetail(@Param('id') id: string) {
     return this.articleService.getArticleDetail(id);
+  }
+
+  @Get(`articles`)
+  getArticles(@Query('ids') ids: string[]) {
+    return this.articleService.getArticles(ids);
   }
 }

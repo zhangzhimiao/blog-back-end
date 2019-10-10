@@ -15,7 +15,6 @@ export class ArticleColumnService {
     articleId: string;
     columnIds: string[];
   }): Promise<BackData> {
-    console.log(data.articleId, data.columnIds);
     const result = data.columnIds.map(d => {
       const articleColumn = new ArticleColumn();
       articleColumn.articleId = parseInt(data.articleId, 10);
@@ -82,6 +81,27 @@ export class ArticleColumnService {
         code: 1,
         data: {
           message: 'delete column error',
+        },
+      }));
+  }
+
+  async getColumnAtricle(columnId: string) {
+    return await getManager()
+      .createQueryBuilder(ArticleColumn, 'articleColumn')
+      .where('columnId = :columnId', {
+        columnId,
+      })
+      .getMany()
+      .then(d => ({
+        code: 0,
+        data: {
+          d,
+        },
+      }))
+      .catch(e => ({
+        code: 1,
+        data: {
+          message: 'get all article column error',
         },
       }));
   }

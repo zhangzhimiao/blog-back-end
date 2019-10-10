@@ -60,7 +60,7 @@ export class ArticleService {
     });
   }
 
-  async getArticleDetail(id: string) {
+  async getArticleDetail(id: string): Promise<BackData> {
     return await getManager()
       .createQueryBuilder(Article, 'article')
       .where('article.id = :id', {
@@ -76,7 +76,24 @@ export class ArticleService {
       .catch(e => ({
         code: 1,
         data: {
-          message: 'login error',
+          message: 'find article error',
+        },
+      }));
+  }
+
+  async getArticles(ids: string[]): Promise<BackData> {
+    return await this.articleRepository
+      .findByIds(ids)
+      .then(d => ({
+        code: 0,
+        data: {
+          d,
+        },
+      }))
+      .catch(e => ({
+        code: 1,
+        data: {
+          message: 'find articles error',
         },
       }));
   }
