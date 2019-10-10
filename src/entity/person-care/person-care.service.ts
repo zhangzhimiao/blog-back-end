@@ -13,8 +13,8 @@ export class PersonCareService {
 
   async addCare(person1Id: string, person2Id: string): Promise<BackData> {
     const personCare = new PersonCare();
-    personCare.carePersonId = person1Id;
-    personCare.beCarePersonId = person2Id;
+    personCare.carePersonId = parseInt(person1Id, 10);
+    personCare.beCarePersonId = parseInt(person2Id, 10);
     return await this.articleLikeRepository
       .save(personCare)
       .then(d => ({ code: 0, data: d }))

@@ -18,8 +18,8 @@ export class ArticleCollectionService {
     const date = new Date().getTime() / 1000;
     const articleCollection = new ArticleCollection();
     articleCollection.collectTime = date;
-    articleCollection.articleId = data.articleId;
-    articleCollection.personId = data.personId;
+    articleCollection.articleId = parseInt(data.articleId, 10);
+    articleCollection.personId = parseInt(data.personId, 10);
     return this.articleCollectionRepository
       .save(articleCollection)
       .then(d => ({

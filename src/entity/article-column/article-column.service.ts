@@ -18,8 +18,8 @@ export class ArticleColumnService {
     console.log(data.articleId, data.columnIds);
     const result = data.columnIds.map(d => {
       const articleColumn = new ArticleColumn();
-      articleColumn.articleId = data.articleId;
-      articleColumn.columnId = d;
+      articleColumn.articleId = parseInt(data.articleId, 10);
+      articleColumn.columnId = parseInt(d, 10);
       return articleColumn;
     });
     return getConnection()

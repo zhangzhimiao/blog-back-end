@@ -6,8 +6,8 @@ export class ArticleLike {
   id: number;
 
   @Column()
-  articleId: string;
+  articleId: number;
 
   @Column()
-  personId: string;
+  personId: number;
 }

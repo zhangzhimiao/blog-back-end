@@ -47,8 +47,4 @@ export class Person {
   @ManyToMany(type => Column)
   @JoinTable()
   columns: Column[];
-
-  @ManyToMany(type => Person)
-  @JoinTable()
-  persons: Person[];
 }

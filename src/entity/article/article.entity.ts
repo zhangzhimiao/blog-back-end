@@ -16,7 +16,7 @@ export class Article {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(type => Person, person => person.articles)
+  @ManyToOne(type => Person, person => person.articles, { nullable: false })
   person: Person;
 
   @Col()

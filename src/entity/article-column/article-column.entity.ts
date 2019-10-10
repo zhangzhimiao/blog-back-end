@@ -6,8 +6,8 @@ export class ArticleColumn {
   id: number;
 
   @Column()
-  articleId: string;
+  articleId: number;
 
   @Column()
-  columnId: string;
+  columnId: number;
 }

@@ -6,10 +6,10 @@ export class ArticleComment {
   id: number;
 
   @Column()
-  articleId: string;
+  articleId: number;
 
   @Column()
-  personId: string;
+  personId: number;
 
   @Column()
   content: string;
@@ -18,5 +18,5 @@ export class ArticleComment {
   commentTime: number;
 
   @Column({ nullable: true })
-  parentCommentId: string;
+  parentCommentId: number;
 }

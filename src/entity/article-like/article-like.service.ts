@@ -16,8 +16,8 @@ export class ArticleLikeService {
     articleId: string;
   }): Promise<BackData> {
     const articleLike = new ArticleLike();
-    articleLike.articleId = data.articleId;
-    articleLike.personId = data.personId;
+    articleLike.articleId = parseInt(data.articleId, 10);
+    articleLike.personId = parseInt(data.personId, 10);
     return this.articleLikeRepository
       .save(articleLike)
       .then(d => ({

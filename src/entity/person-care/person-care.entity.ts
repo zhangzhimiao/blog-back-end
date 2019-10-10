@@ -6,8 +6,8 @@ export class PersonCare {
   id: number;
 
   @Column()
-  carePersonId: string;
+  carePersonId: number;
 
   @Column()
-  beCarePersonId: string;
+  beCarePersonId: number;
 }

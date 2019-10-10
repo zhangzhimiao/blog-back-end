@@ -9,8 +9,8 @@ export class ArticleCollection {
   collectTime: number;
 
   @Column()
-  articleId: string;
+  articleId: number;
 
   @Column()
-  personId: string;
+  personId: number;
 }
