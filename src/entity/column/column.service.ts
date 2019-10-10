@@ -27,4 +27,21 @@ export class ColumnService {
         },
       }));
   }
+
+  async getColumns(): Promise<BackData> {
+    return this.typeRepository
+      .find()
+      .then(d => ({
+        code: 0,
+        data: {
+          ...d,
+        },
+      }))
+      .catch(e => ({
+        code: 1,
+        data: {
+          message: "can't find this user",
+        },
+      }));
+  }
 }
