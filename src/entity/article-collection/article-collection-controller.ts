@@ -26,11 +26,11 @@ export class ArticleCollectionController {
     return this.articleCollectionService.getAllCollection(personId);
   }
 
-  @Delete('cancle-collect')
-  cancleCollect(@Body('data') data: { personId: string; articleId: string }) {
-    return this.articleCollectionService.cancleCollect(
-      data.personId,
-      data.articleId,
-    );
+  @Delete('cancel-collect')
+  cancelCollect(
+    @Body('personId') personId: string,
+    @Body('articleId') articleId: string,
+  ) {
+    return this.articleCollectionService.cancelCollect(personId, articleId);
   }
 }

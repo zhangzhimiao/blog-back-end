@@ -27,4 +27,14 @@ export class ArticleController {
   getArticles(@Query('ids') ids: string[]) {
     return this.articleService.getArticles(ids);
   }
+
+  @Get(`:personId/articles`)
+  getPersonArticles(@Param('personId') personId: string) {
+    return this.articleService.getPersonArticles(personId);
+  }
+
+  @Get('all')
+  getAllArticles() {
+    return this.articleService.getAllArticles();
+  }
 }

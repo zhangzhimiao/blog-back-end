@@ -61,12 +61,8 @@ export class ArticleService {
   }
 
   async getArticleDetail(id: string): Promise<BackData> {
-    return await getManager()
-      .createQueryBuilder(Article, 'article')
-      .where('article.id = :id', {
-        id,
-      })
-      .getOne()
+    return await this.articleRepository
+      .findOne(id, { relations: ['person'] })
       .then(d => ({
         code: 0,
         data: {
@@ -83,7 +79,45 @@ export class ArticleService {
 
   async getArticles(ids: string[]): Promise<BackData> {
     return await this.articleRepository
-      .findByIds(ids)
+      .findByIds(ids, {
+        relations: ['person'],
+      })
+      .then(d => ({
+        code: 0,
+        data: {
+          d,
+        },
+      }))
+      .catch(e => ({
+        code: 1,
+        data: {
+          message: 'find articles error',
+        },
+      }));
+  }
+
+  async getAllArticles(): Promise<BackData> {
+    return await this.articleRepository
+      .find({ relations: ['person'] })
+      .then(d => ({
+        code: 0,
+        data: {
+          d,
+        },
+      }))
+      .catch(e => ({
+        code: 1,
+        data: {
+          message: 'find articles error',
+        },
+      }));
+  }
+
+  async getPersonArticles(personId: string): Promise<BackData> {
+    return await this.articleRepository
+      .createQueryBuilder('article')
+      .where('personId=:personId', { personId })
+      .getMany()
       .then(d => ({
         code: 0,
         data: {

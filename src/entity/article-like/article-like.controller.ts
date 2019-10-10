@@ -23,8 +23,11 @@ export class ArticleLikeController {
     return this.articleLikeService.getAllLikeArticles(personId);
   }
 
-  @Delete('cancle-like')
-  cancleCollect(@Body('data') data: { personId: string; articleId: string }) {
-    return this.articleLikeService.cancleLike(data.personId, data.articleId);
+  @Delete('cancel-like')
+  cancelCollect(
+    @Body('personId') personId: string,
+    @Body('articleId') articleId: string,
+  ) {
+    return this.articleLikeService.cancelLike(personId, articleId);
   }
 }

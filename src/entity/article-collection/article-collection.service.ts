@@ -82,7 +82,7 @@ export class ArticleCollectionService {
       }));
   }
 
-  async cancleCollect(personId: string, articleId: string) {
+  async cancelCollect(personId: string, articleId: string) {
     return await getConnection()
       .createQueryBuilder()
       .delete()

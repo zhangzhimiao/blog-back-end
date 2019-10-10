@@ -77,7 +77,7 @@ export class ArticleLikeService {
       }));
   }
 
-  async cancleLike(personId: string, articleId: string) {
+  async cancelLike(personId: string, articleId: string) {
     return await getConnection()
       .createQueryBuilder()
       .delete()
