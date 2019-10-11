@@ -37,4 +37,18 @@ export class ArticleController {
   getAllArticles() {
     return this.articleService.getAllArticles();
   }
+
+  @Post('update')
+  update(@Body('data')
+  data: {
+    articleId: string;
+    personId: string;
+    content: string;
+    isPublic: string;
+    title: string;
+    columnIds: string[];
+    label: string[];
+  }) {
+    return this.articleService.update(data);
+  }
 }

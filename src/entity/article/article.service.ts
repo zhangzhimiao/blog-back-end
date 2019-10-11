@@ -131,4 +131,70 @@ export class ArticleService {
         },
       }));
   }
+
+  async update(data: {
+    articleId: string;
+    personId: string;
+    content: string;
+    isPublic: string;
+    title: string;
+    columnIds: string[];
+    label: string[];
+  }): Promise<BackData> {
+    const article = new Article();
+    article.id = parseInt(data.articleId, 10);
+    return getConnection()
+      .createQueryBuilder()
+      .relation(Article, 'labels')
+      .of(article)
+      .set(null)
+      .then(d => ({
+        code: 0,
+        data: {
+          d,
+        },
+      }))
+      .catch(e => ({
+        code: 1,
+        data: {
+          message: 'find articles error',
+        },
+      }));
+    // return service.getPerson(data.personId).then(personData => {
+    //   const date = new Date().getTime() / 1000;
+    //   const article = new Article();
+    //   article.content = data.content;
+    //   article.title = data.title;
+    //   article.isPublic = parseInt(data.isPublic, 10);
+    //   article.publishTime = date;
+    //   const person = new Person();
+    //   person.id = personData.data.data.id;
+    //   person.name = personData.data.data.name;
+    //   person.password = personData.data.data.password;
+    //   article.person = person;
+    //   const labels = data.label.map(name => {
+    //     const label = new Label();
+    //     label.article = article;
+    //     label.name = name;
+    //     return label;
+    //   });
+    //   return Promise.all([
+    //     getConnection().manager.save(article),
+    //     getConnection().manager.save(labels),
+    //   ])
+    //     .then(([d1, d2]) => {
+    //       return service
+    //         .addArticleColumn(d1.id.toString(), data.columnIds)
+    //         .then(() => {
+    //           return { code: 0, data: { d1 } };
+    //         });
+    //     })
+    //     .catch(e => ({
+    //       code: 1,
+    //       data: {
+    //         message: 'publish error',
+    //       },
+    //     }));
+    // });
+  }
 }
