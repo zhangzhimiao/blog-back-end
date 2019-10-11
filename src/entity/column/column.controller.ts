@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get } from '@nestjs/common';
+import { Controller, Post, Body, Get, Query } from '@nestjs/common';
 import { ColumnService } from './column.service';
 
 @Controller(`entity/column`)
@@ -12,5 +12,10 @@ export class ColumnController {
   @Get('all')
   getAllColumns() {
     return this.columnService.getColumns();
+  }
+
+  @Get('columns')
+  getColumnsById(@Query('ids') ids: string[]) {
+    return this.columnService.getColumnsById(ids);
   }
 }

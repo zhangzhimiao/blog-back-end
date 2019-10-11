@@ -3,15 +3,34 @@ import { PersonCareService } from './person-care.service';
 
 @Controller(`entity/person-care`)
 export class PersonCareController {
-  constructor(private articleLikeService: PersonCareService) {}
+  constructor(private personCareService: PersonCareService) {}
 
   @Post('care')
-  addCare(@Body('data') data: { person1Id: string; person2Id: string }) {
-    return this.articleLikeService.addCare(data.person1Id, data.person2Id);
+  addCare(
+    @Body('careId') careId: string,
+    @Body('beCaredId') beCaredId: string,
+  ) {
+    return this.personCareService.addCare(careId, beCaredId);
   }
 
   @Delete('cancel-care')
-  cancelCare(@Body('data') data: { person1Id: string; person2Id: string }) {
-    return this.articleLikeService.cancelCare(data.person1Id, data.person2Id);
+  cancelCare(
+    @Body('careId') careId: string,
+    @Body('beCaredId') beCaredId: string,
+  ) {
+    return this.personCareService.cancelCare(careId, beCaredId);
+  }
+
+  @Get('care-info/:careId/:beCaredId')
+  getAtricleCollection(
+    @Param('careId') careId: string,
+    @Param('beCaredId') beCaredId: string,
+  ) {
+    return this.personCareService.getCareInfo(careId, beCaredId);
+  }
+
+  @Get('cares/:careId')
+  getCares(@Param('careId') careId: string) {
+    return this.personCareService.getCares(careId);
   }
 }

@@ -16,8 +16,8 @@ export class PersonService {
     const person = new Person();
     person.name = data.name;
     person.password = data.password;
-    person.isAdmin = 0;
-    person.isEnabled = 1;
+    person.isAdmin = 1;
+    person.isEnabled = 0;
     return await this.personRepository
       .save(person)
       .then(d => ({ code: 0, data: { ...d } }))

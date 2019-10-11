@@ -12,6 +12,9 @@ export class ArticleComment {
   personId: number;
 
   @Column()
+  personName: string;
+
+  @Column()
   content: string;
 
   @Column()

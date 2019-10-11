@@ -44,4 +44,21 @@ export class ColumnService {
         },
       }));
   }
+
+  async getColumnsById(ids: string[]): Promise<BackData> {
+    return this.typeRepository
+      .findByIds(ids)
+      .then(d => ({
+        code: 0,
+        data: {
+          ...d,
+        },
+      }))
+      .catch(e => ({
+        code: 1,
+        data: {
+          message: "can't find columns",
+        },
+      }));
+  }
 }
