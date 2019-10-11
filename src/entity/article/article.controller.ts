@@ -47,8 +47,9 @@ export class ArticleController {
     isPublic: string;
     title: string;
     columnIds: string[];
-    label: string[];
+    labels: string[];
   }) {
+    console.log(data);
     return this.articleService.update(data);
   }
 }

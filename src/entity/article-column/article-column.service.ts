@@ -68,7 +68,7 @@ export class ArticleColumnService {
       .delete()
       .from(ArticleColumn)
       .where('articleId = :articleId', {
-        articleId,
+        articleId: articleId,
       })
       .execute()
       .then(d => ({

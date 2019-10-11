@@ -31,6 +31,18 @@ export class Service {
       },
     });
   }
+
+  deleteColumnsByArticleId(articleId) {
+    return this.instance.delete('article-column/delete', {
+      data: { data: { articleId } },
+    });
+  }
+
+  deleteLabelsByArticleId(articleId) {
+    return this.instance.delete('label/delete', {
+      data: { articleId },
+    });
+  }
 }
 
 export const service = new Service();

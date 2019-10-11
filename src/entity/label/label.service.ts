@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Label } from './label.entity';
-import { Repository } from 'typeorm';
+import { Repository, getConnection } from 'typeorm';
 
 @Injectable()
 export class LabelService {
@@ -27,6 +27,29 @@ export class LabelService {
         code: 1,
         data: {
           message: 'get article labes error',
+        },
+      }));
+  }
+
+  async deleteLabesByArticleId(articleId: string) {
+    return await getConnection()
+      .createQueryBuilder()
+      .delete()
+      .from(Label)
+      .where('articleId = :articleId', {
+        articleId,
+      })
+      .execute()
+      .then(d => ({
+        code: 0,
+        data: {
+          d,
+        },
+      }))
+      .catch(e => ({
+        code: 1,
+        data: {
+          message: 'delete article labes error',
         },
       }));
   }
