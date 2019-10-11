@@ -49,7 +49,6 @@ export class ArticleController {
     columnIds: string[];
     labels: string[];
   }) {
-    console.log(data);
     return this.articleService.update(data);
   }
 }
