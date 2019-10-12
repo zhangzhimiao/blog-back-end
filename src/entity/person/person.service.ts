@@ -88,7 +88,10 @@ export class PersonService {
       }));
   }
 
-  async addColumns(columnIds: string[], personId: string): Promise<BackData> {
+  async manageColumns(
+    columnIds: string[],
+    personId: string,
+  ): Promise<BackData> {
     const result = columnIds.map(d => {
       const column = new Column();
       column.id = parseInt(d, 10);
@@ -109,6 +112,28 @@ export class PersonService {
         code: 1,
         data: {
           message: 'add columns failed',
+        },
+      }));
+  }
+
+  async getPersonsByIds(ids: string[]) {
+    const persons = ids.map(d => {
+      const person = new Person();
+      person.id = parseInt(d, 10);
+      return person;
+    });
+    return this.personRepository
+      .find({ select: ['id', 'name'], where: persons })
+      .then(d => ({
+        code: 0,
+        data: {
+          ...d,
+        },
+      }))
+      .catch(e => ({
+        code: 1,
+        data: {
+          message: 'find persons failed',
         },
       }));
   }

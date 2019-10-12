@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Query } from '@nestjs/common';
 import { PersonService } from './person.service';
 
 @Controller(`entity/person`)
@@ -25,8 +25,14 @@ export class PersonController {
     return this.personService.getColumns(id);
   }
 
-  @Post('add-column')
-  addColumns(@Body('data') data: { columnIds: string[]; personId: string }) {
-    return this.personService.addColumns(data.columnIds, data.personId);
+  @Post('manage-column')
+  manageColumns(@Body('data') data: { columnIds: string[]; personId: string }) {
+    console.log(data.columnIds, data.personId);
+    return this.personService.manageColumns(data.columnIds, data.personId);
+  }
+
+  @Get('persons')
+  getPersonsByIds(@Query('ids') ids: string[]) {
+    return this.personService.getPersonsByIds(ids);
   }
 }
